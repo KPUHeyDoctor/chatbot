@@ -37,6 +37,9 @@ def decision():
     print('유사도', answer['distance'])
     useranswer = str(answer['챗봇'])
 
+    if answer['distance'] < 0.6:
+        useranswer = "예외처리 되었습니다."
+
     responseBody = {
         "version": "2.0",
         "template": {
