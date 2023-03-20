@@ -18,10 +18,8 @@ def decision():
     json_data = request.get_json() 
     text = json_data['userRequest']['utterance']
 
-    print(text)
-
     model = SentenceTransformer('jhgan/ko-sroberta-multitask')
-    df = pd.read_csv('test1.csv')
+    df = pd.read_csv('wellness_dataset.csv')
     df['embedding'] = df['embedding'].apply(json.loads)
     embedding = model.encode(text)
     #미리 임베딩한 데이터셋에서 사용자가 입력한 문장의 임베딩과 비교를 하여 가장 유사한것을 찾음
@@ -37,8 +35,9 @@ def decision():
     print('유사도', answer['distance'])
     useranswer = str(answer['챗봇'])
 
-    if answer['distance'] < 0.6:
-        useranswer = "예외처리 되었습니다."
+    # 사용자 발화와 답변의 유사도가 0.7 미만이면 예외 처리 답변을 반환합니다.
+    if(answer['distance'] < 0.7):
+        useranswer = "무슨 말인지 이해하지 못했어요."
 
     responseBody = {
         "version": "2.0",
@@ -60,5 +59,6 @@ def decision():
 def connect():
     return "Backend Server Connect"
 
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0' ,port = 5003, debug=True)
+    app.run(host='0.0.0.0' ,port = 5002, debug=True)
