@@ -19,7 +19,8 @@ def decision():
     text = json_data['userRequest']['utterance']
 
     model = SentenceTransformer('jhgan/ko-sroberta-multitask')
-    df = pd.read_csv('wellness_dataset.csv')
+    # df = pd.read_csv('wellness_dataset.csv')
+    df = pd.read_csv('answer.csv')
     df['embedding'] = df['embedding'].apply(json.loads)
     embedding = model.encode(text)
     #미리 임베딩한 데이터셋에서 사용자가 입력한 문장의 임베딩과 비교를 하여 가장 유사한것을 찾음
