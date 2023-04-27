@@ -36,7 +36,7 @@ def decision():
     print('유사도', answer['distance'])
     useranswer = str(answer['챗봇'])
 
-    # 사용자 발화와 답변의 유사도가 0.7 미만이면 예외 처리 답변을 반환합니다.
+    # 사용자 발화와 답변의 유사도가 0.6 미만이면 예외 처리 답변을 반환합니다.
     if(answer['distance'] < 0.6):
         useranswer = "증상을 조금 더 구체적으로 말씀해주세요. (예시: 두통이 심한데 어느 병원을 가야할까요?)"
 
