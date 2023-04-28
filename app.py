@@ -29,16 +29,18 @@ def decision():
     df.head()
 
     answer = df.loc[df['distance'].idxmax()]
-
-    print('구분', answer['구분'])
-    print('유사한 질문', answer['유저'])
-    print('챗봇 답변', answer['챗봇'])
-    print('유사도', answer['distance'])
-    useranswer = str(answer['챗봇'])
+    print('[질문]', text)
+    print('[구분]', answer['구분'])
+    print('[유사한 질문]', answer['유저'])
+    print('[유사도]', answer['distance'])
+    print('\n[챗봇 답변]', answer['챗봇'])
 
     # 사용자 발화와 답변의 유사도가 0.6 미만이면 예외 처리 답변을 반환합니다.
     if(answer['distance'] < 0.6):
         useranswer = "증상을 조금 더 구체적으로 말씀해주세요. (예시: 두통이 심한데 어느 병원을 가야할까요?)"
+    else:
+        useranswer = str(answer['챗봇'])
+
 
     responseBody = {
         "version": "2.0",
